@@ -2,11 +2,13 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: blitzy-node
-  description: "Node.js runtime fork — exploring AI-assisted contributions to runtime internals"
+  description: Node.js runtime fork — exploring AI-assisted contributions to runtime
+    internals
   tags:
-    - typescript
-    - infrastructure
-    - refactor
+  - infrastructure
+  - javascript
+  - refactor
+  - typescript
   labels:
     blitzy.com/language: javascript
   annotations:
@@ -14,11 +16,11 @@ metadata:
     github.com/project-slug: Blitzy-Sandbox/blitzy-node
     backstage.io/source-location: url:https://github.com/Blitzy-Sandbox/blitzy-node/tree/main/
   links:
-    - url: https://github.com/Blitzy-Sandbox/blitzy-node
-      title: GitHub Repository
-    - url: https://github.com/Blitzy-Sandbox/blitzy-node/tree/main/blitzy/documentation
-      title: Blitzy Documentation
-      icon: docs
+  - url: https://github.com/Blitzy-Sandbox/blitzy-node
+    title: GitHub Repository
+  - url: https://github.com/Blitzy-Sandbox/blitzy-node/tree/main/blitzy/documentation
+    title: Blitzy Documentation
+    icon: docs
 spec:
   type: library
   lifecycle: experimental
