@@ -5,6 +5,7 @@ metadata:
   description: Node.js runtime fork — exploring AI-assisted contributions to runtime
     internals
   tags:
+  - cpp
   - infrastructure
   - javascript
   - refactor
