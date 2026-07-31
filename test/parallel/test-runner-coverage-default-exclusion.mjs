@@ -156,16 +156,20 @@ describe('test runner coverage default exclusion', skipIfNoInspector, () => {
 
   // The node_modules exclusion must likewise be decided from the working directory
   // relative path, so an ancestor node_modules directory cannot exclude the project.
+  // The run starts one level above the staged project so that the project's own
+  // dependency is relative as project/node_modules/dependency.js: that keeps the
+  // interior node_modules segment covered, which a top level only check would miss.
   it('should not exclude files because an ancestor directory is named node_modules', async () => {
     const report = [
       '# start of coverage report',
-      '# --------------------------------------------------------------',
-      '# file          | line % | branch % | funcs % | uncovered lines',
-      '# --------------------------------------------------------------',
-      '# logic-file.js |  66.67 |   100.00 |   50.00 | 5-7',
-      '# --------------------------------------------------------------',
-      '# all files     |  66.67 |   100.00 |   50.00 | ',
-      '# --------------------------------------------------------------',
+      '# ---------------------------------------------------------------',
+      '# file           | line % | branch % | funcs % | uncovered lines',
+      '# ---------------------------------------------------------------',
+      '# project        |        |          |         | ',
+      '#  logic-file.js |  66.67 |   100.00 |   50.00 | 5-7',
+      '# ---------------------------------------------------------------',
+      '# all files      |  66.67 |   100.00 |   50.00 | ',
+      '# ---------------------------------------------------------------',
       '# end of coverage report',
     ].join('\n');
 
@@ -174,10 +178,11 @@ describe('test runner coverage default exclusion', skipIfNoInspector, () => {
       '--test',
       '--experimental-test-coverage',
       '--test-reporter=tap',
+      'project/file.test.mjs',
     ];
     const result = spawnSync(process.execPath, args, {
       env: { ...process.env, NODE_TEST_TMPDIR: tmpdir.path },
-      cwd: tmpdir.resolve('node_modules', 'project')
+      cwd: tmpdir.resolve('node_modules')
     });
 
     assert.strictEqual(result.stderr.toString(), '');
